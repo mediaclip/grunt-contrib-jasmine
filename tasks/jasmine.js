@@ -250,6 +250,7 @@ module.exports = function(grunt) {
           return error.message;
         });
         summary.push({
+          suite: suites[currentSuite].name,
           name: specMetaData.description,
           errors: specMetaData.failedExpectations.map(function(error){
             return {
@@ -334,7 +335,7 @@ module.exports = function(grunt) {
     function logSummary(tests) {
         grunt.log.writeln('Summary (' + tests.length + ' tests failed)');
         _.forEach(tests, function(test){
-            grunt.log.writeln(chalk.red(symbols['error']) + ' ' + test.name);
+            grunt.log.writeln(chalk.red(symbols['error']) + ' ' + test.suite + ' ' + test.name);
             _.forEach(test.errors, function(error){
               grunt.log.writeln('    ' + chalk.red(error.message));
             });
